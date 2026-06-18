@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#F7F3F1"/><circle cx="50" cy="50" r="30" fill="url(#g)"/><path d="M61 38A18 18 0 1 0 61 62" stroke="#fff" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M41 43 50 62 59 43" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C9879A"/><stop offset=".5" stop-color="#8C6E9E"/><stop offset="1" stop-color="#5B3373"/></linearGradient></defs></svg></template>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#F7F3F1;}
+  ::selection{background:rgba(140,110,158,.20);}
+  .reveal{opacity:1;}
+  .reveal[data-in="1"]{animation:revealUp 1s cubic-bezier(.19,1,.22,1);}
+  @keyframes revealUp{from{transform:translateY(34px)}to{transform:none}}
+  @keyframes blobMorph{0%{border-radius:46% 54% 60% 40%/50% 42% 58% 50%;transform:rotate(0deg) scale(1)}25%{border-radius:62% 38% 48% 52%/56% 44% 56% 44%}50%{border-radius:58% 42% 44% 56%/42% 56% 44% 58%;transform:rotate(180deg) scale(1.07)}75%{border-radius:38% 62% 58% 42%/48% 52% 46% 54%}100%{border-radius:46% 54% 60% 40%/50% 42% 58% 50%;transform:rotate(360deg) scale(1)}}
+  @keyframes blobHue{0%{filter:blur(2px) hue-rotate(0deg)}50%{filter:blur(3px) hue-rotate(28deg)}100%{filter:blur(2px) hue-rotate(0deg)}}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}*{animation:none!important;}}
+  @media(max-width:880px){
+    [data-hero]{grid-template-columns:1fr!important;gap:40px!important;}
+    [data-hero]>*:last-child{order:-1;}
+    [data-aboutgrid]{grid-template-columns:1fr!important;}
+    [data-connect]{grid-template-columns:1fr!important;}
+    [data-areas]{grid-template-columns:1fr 1fr!important;}
+    [data-cvrow]{grid-template-columns:1fr 1fr!important;}
+    [data-projgrid]{grid-template-columns:1fr 1fr!important;}
+    [data-dmeta]{grid-template-columns:1fr 1fr!important;}
+    [data-pps]{grid-template-columns:1fr!important;gap:6px!important;}
+  }
+  @media(max-width:620px){
+    [data-navlink]{display:none!important;}
+    [data-projgrid]{grid-template-columns:1fr!important;}
+    [data-areas]{grid-template-columns:1fr!important;}
+    [data-cvrow]{grid-template-columns:1fr!important;}
+    [data-gallery]{grid-template-columns:1fr!important;}
+    [data-dmeta]{grid-template-columns:1fr!important;}
+  }
+</style>
+</helmet>
+
+<div style="font-family:'Hanken Grotesk',system-ui,sans-serif;color:#2E2A33;background:#F7F3F1;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh;">
+
+  <!-- NAV -->
+  <header style="position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(247,243,241,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(46,42,51,.06);">
+    <div style="max-width:1200px;margin:0 auto;padding:15px clamp(20px,5vw,40px);display:flex;align-items:center;justify-content:space-between;gap:16px;">
+      <a href="#top" onClick="{{ onNavScroll }}" data-target="top" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:#2E2A33;">
+        <span style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:linear-gradient(140deg,#c9879a,#8c6e9e,#5b3373);box-shadow:0 6px 16px -6px rgba(91,51,115,.55);"></span>
+        <span style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;letter-spacing:.01em;white-space:nowrap;">Camila Vallejo Calizaya</span>
+      </a>
+      <nav style="display:flex;align-items:center;gap:4px;">
+        <a href="#sobre" onClick="{{ onNavScroll }}" data-target="sobre" data-navlink="" style="text-decoration:none;color:#2E2A33;font-weight:500;font-size:15px;padding:9px 16px;border-radius:999px;white-space:nowrap;">Sobre mí</a>
+        <a href="#proyectos" onClick="{{ onNavScroll }}" data-target="proyectos" data-navlink="" style="text-decoration:none;color:#2E2A33;font-weight:500;font-size:15px;padding:9px 16px;border-radius:999px;">Proyectos</a>
+        <a href="#contacto" onClick="{{ onNavScroll }}" data-target="contacto" data-navlink="" style="text-decoration:none;color:#2E2A33;font-weight:500;font-size:15px;padding:9px 16px;border-radius:999px;">Contacto</a>
+        <a href="mailto:camila.vallejo@uc.cl" style="margin-left: 8px; display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 999px; color: #fff; text-decoration: none; font-weight: 600; font-size: 14.5px; background: linear-gradient(180deg, #bb819b, #8c6e9e)">Trabajemos</a>
+      </nav>
+    </div>
+  </header>
+
+  <span id="top"></span>
+
+  <!-- ===================== HOME ===================== -->
+  <!-- ===================== DETALLE ===================== -->
+  <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+  <main data-screen-label="Proyecto" style="padding-top:90px;max-width:1040px;margin:0 auto;padding-left:clamp(20px,5vw,40px);padding-right:clamp(20px,5vw,40px);padding-bottom:clamp(56px,7vw,90px);">
+    <a href="#" onClick="{{ backHome }}" style="display:flex;width:fit-content;align-items:center;gap:8px;font-size:14.5px;font-weight:600;color:rgba(46,42,51,.6);text-decoration:none;cursor:pointer;margin-bottom:30px;">← Volver a proyectos</a>
+    <span style="display:block;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8C6E9E;margin-bottom:14px;">{{ d.category }}</span>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(44px,8vw,90px);line-height:.98;letter-spacing:-.01em;margin:0 0 22px;">{{ d.name }}</h1>
+    <p style="font-size:clamp(17px,2vw,22px);line-height:1.6;color:rgba(46,42,51,.76);max-width:40em;margin:0 0 40px;">{{ d.brief }}</p>
+
+    <div data-dmeta="" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(46,42,51,.1);border:1px solid rgba(46,42,51,.1);border-radius:18px;overflow:hidden;margin-bottom:44px;">
+      <div style="background:#F7F3F1;padding:20px 22px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(46,42,51,.5);margin-bottom:7px;">Rol</div><div style="font-weight:600;font-size:15px;">{{ d.role }}</div></div>
+      <div style="background:#F7F3F1;padding:20px 22px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(46,42,51,.5);margin-bottom:7px;">Duración</div><div style="font-weight:600;font-size:15px;">{{ d.duration }}</div></div>
+      <div style="background:#F7F3F1;padding:20px 22px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(46,42,51,.5);margin-bottom:7px;">Año</div><div style="font-weight:600;font-size:15px;">{{ d.year }}</div></div>
+      <div style="background:#F7F3F1;padding:20px 22px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(46,42,51,.5);margin-bottom:7px;">Categoría</div><div style="font-weight:600;font-size:15px;">{{ d.category }}</div></div>
+    </div>
+
+    <div style="aspect-ratio:16/9;border-radius:28px;overflow:hidden;position:relative;background:{{ d.bg }};margin-bottom:clamp(40px,5vw,64px);">
+      <span style="position:absolute;inset:0;display:flex;align-items:flex-end;padding:22px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:rgba(46,42,51,.4);z-index:1;">[ {{ d.id }}-cover ]</span>
+      <img src="{{ dCover }}" alt="{{ d.name }}" loading="lazy" data-fade="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;">
+    </div>
+
+    <div style="display:flex;flex-direction:column;margin-bottom:clamp(40px,5vw,64px);">
+      <div data-pps="" style="display:grid;grid-template-columns:200px 1fr;gap:14px 44px;align-items:start;padding:28px 0;border-top:1px solid rgba(46,42,51,.1);"><span style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#C9879A;">01 — Problema</span><p style="font-size:17px;line-height:1.7;color:rgba(46,42,51,.82);margin:0;">{{ d.problema }}</p></div>
+      <div data-pps="" style="display:grid;grid-template-columns:200px 1fr;gap:14px 44px;align-items:start;padding:28px 0;border-top:1px solid rgba(46,42,51,.1);"><span style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#8C6E9E;">02 — Proceso</span><p style="font-size:17px;line-height:1.7;color:rgba(46,42,51,.82);margin:0;">{{ d.proceso }}</p></div>
+      <div data-pps="" style="display:grid;grid-template-columns:200px 1fr;gap:14px 44px;align-items:start;padding:28px 0;border-top:1px solid rgba(46,42,51,.1);border-bottom:1px solid rgba(46,42,51,.1);"><span style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#7C6BA8;">03 — Solución</span><p style="font-size:17px;line-height:1.7;color:rgba(46,42,51,.82);margin:0;">{{ d.solucion }}</p></div>
+    </div>
+
+    <sc-if value="{{ hasGallery }}" hint-placeholder-val="{{ true }}">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;margin:0 0 22px;">Galería</h3>
+      <div data-gallery="" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:clamp(40px,5vw,56px);">
+        <sc-for list="{{ dGallery }}" as="g" hint-placeholder-count="4">
+          <button onClick="{{ g.open }}" style="aspect-ratio:4/3;border-radius:18px;border:none;padding:0;cursor:pointer;overflow:hidden;position:relative;background:#EFE7F4;transition:transform .4s cubic-bezier(.19,1,.22,1),box-shadow .4s ease;" style-hover="transform:scale(1.015);box-shadow:0 20px 44px -22px rgba(140,110,158,.5);">
+            <span style="position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(46,42,51,.4);z-index:1;">[ {{ g.label }} ]</span>
+            <img src="{{ g.src }}" alt="{{ g.label }}" loading="lazy" data-fade="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;">
+          </button>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:clamp(48px,6vw,72px);">
+      <sc-for list="{{ dTags }}" as="t" hint-placeholder-count="3">
+        <span style="padding:8px 16px;border-radius:999px;border:1.5px solid rgba(46,42,51,.16);font-size:14px;font-weight:500;color:rgba(46,42,51,.78);">{{ t }}</span>
+      </sc-for>
+    </div>
+
+    <div style="border-top:1px solid rgba(46,42,51,.12);padding-top:30px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+      <a href="#" onClick="{{ backHome }}" style="font-size:15px;font-weight:600;color:rgba(46,42,51,.6);text-decoration:none;cursor:pointer;">← Todos los proyectos</a>
+      <a href="#" onClick="{{ openNext }}" style="display:inline-flex;flex-direction:column;align-items:flex-end;text-decoration:none;cursor:pointer;">
+        <small style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(46,42,51,.5);">Siguiente</small>
+        <b style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:30px;color:#8C6E9E;">{{ nextName }} →</b>
+      </a>
+    </div>
+  </main>
+  </sc-if>
+
+  <!-- ===================== HOME ===================== -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <main style="padding-top:70px;">
+
+    <!-- HERO -->
+    <section style="max-width:1200px;margin:0 auto;padding:clamp(40px,7vw,96px) clamp(20px,5vw,40px) clamp(30px,4vw,56px);display:grid;grid-template-columns:1.04fr .96fr;gap:clamp(32px,5vw,72px);align-items:center;" data-hero="">
+      <div class="reveal">
+        <span style="display:inline-flex;align-items:center;gap:9px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8C6E9E;margin-bottom:24px;"><span style="width:7px;height:7px;border-radius:50%;background:#C9879A;display:inline-block;"></span>Diseñadora Integral · PUC Chile</span>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(46px,7.2vw,92px);line-height:.98;letter-spacing:-.01em;margin:0 0 26px;text-wrap:balance;">Diseño con<br>propósito, <em style="font-style:italic;color:#8C6E9E;">de principio<br>a fin.</em></h1>
+        <p style="font-size:clamp(16px,1.5vw,19px);line-height:1.7;color:rgba(46,42,51,.74);max-width:30em;margin:0 0 32px;">Producto, marca y experiencia digital integrados — con investigación en terreno y herramientas de IA para optimizar cada proceso.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;">
+          
+          <a href="#proyectos" onClick="{{ onNavScroll }}" data-target="proyectos" style="display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; border-radius: 999px; background: linear-gradient(135deg, #c9879a, #8c6e9e); color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; box-shadow: 0 14px 30px -12px rgba(140,110,158,.6); padding-left: 30px; padding-right: 30px" style-hover="transform:translateY(-5px);">Ver proyectos →</a><a href="#contacto" onClick="{{ onNavScroll }}" data-target="contacto" style="display: inline-flex; align-items: center; padding: 16px 30px; border-radius: 999px; background: transparent; color: #2E2A33; text-decoration: none; font-weight: 600; font-size: 16px; border: 1.5px solid rgba(46,42,51,.22); padding-left: 30px; padding-right: 30px" style-hover="transform:translateY(-5px);">Contacto</a>
+        </div>
+      </div>
+      <div class="reveal" data-herovisual="" style="position:relative;display:flex;align-items:center;justify-content:center;min-height:380px;">
+        <div data-blobwrap="" style="position:absolute;width:min(440px,92%);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;transition:transform .4s cubic-bezier(.19,1,.22,1);will-change:transform;z-index:1;">
+          <div data-blob="" style="width:100%;height:100%;background:linear-gradient(150deg,#E7DCF2,#F4DEE3 55%,#EFE6F6);border-radius:46% 54% 60% 40%/50% 42% 58% 50%;animation:blobMorph 20s ease-in-out infinite,blobHue 11s ease-in-out infinite;filter:blur(2px);will-change:transform,border-radius,filter;transition:filter .4s ease;"></div>
+        </div>
+        <div style="position:relative;width:min(390px,88%);aspect-ratio:4/5;display:flex;align-items:flex-end;justify-content:center;z-index:5;pointer-events:none;">
+          <img src="./l1-3--mqiuzpox.png" alt="Retrato de Camila Vallejo" style="position: absolute; inset: 0; width: 495px; height: 467px; object-fit: cover; z-index: 6; opacity: 1; filter: drop-shadow(0 22px 30px rgba(140,110,158,.4)); left: -29px; top: -4px">
+        </div>
+        <div style="position:absolute;bottom:6%;left:-2%;z-index:10;background:rgba(247,243,241,.92);backdrop-filter:blur(8px);border:1px solid rgba(46,42,51,.07);border-radius:18px;padding:14px 20px;box-shadow:0 18px 40px -18px rgba(140,110,158,.4);">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;line-height:1;color:#8C6E9E;">6+</div>
+          <div style="font-size:12px;color:rgba(46,42,51,.6);margin-top:3px;">proyectos<br>seleccionados</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE STRIP -->
+    <section style="padding:clamp(18px,3vw,30px) 0;border-top:1px solid rgba(46,42,51,.08);border-bottom:1px solid rgba(46,42,51,.08);overflow:hidden;" data-strip="">
+      <div style="display:flex;width:max-content;animation:marquee 30s linear infinite;align-items:center;">
+        <sc-for list="{{ marqueeItems }}" as="m" hint-placeholder-count="12">
+          <span style="display:inline-flex;align-items:center;gap:clamp(28px,4vw,56px);padding:0 clamp(14px,2vw,28px);">
+            <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(20px,2.6vw,32px);color:rgba(46,42,51,.34);white-space:nowrap;">{{ m }}</span>
+            <span style="width:7px;height:7px;border-radius:50%;background:#C9879A;flex:none;"></span>
+          </span>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    
+
+    <!-- PROYECTOS -->
+    <section id="sobre" style="max-width: 1200px; margin: 0 auto; padding: clamp(60px,8vw,110px) clamp(20px,5vw,40px); scroll-margin-top: 80px; height: 1334px">
+      <div class="reveal" data-about="" style="background: #fff; border: 1px solid rgba(46,42,51,.06); border-radius: clamp(22px,3vw,36px); box-shadow: 0 34px 80px -46px rgba(140,110,158,.45); padding: clamp(22px,3.4vw,46px); display: block">
+        <div data-aboutgrid="" style="display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(26px,4vw,52px);align-items:center;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div style="grid-row:span 2;aspect-ratio:3/5;border-radius:20px 20px 20px 70px;overflow:hidden;position:relative;background:repeating-linear-gradient(45deg,#EFE7F4 0 14px,#E9DEF0 14px 28px);display:flex;align-items:flex-end;justify-content:center;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#9a8fae;padding:0 10px 14px;text-align:center;position:relative;z-index:1;">[ about-1.jpg ]</span>
+              <img src="./about-3-mqis0c92.jpg" alt="" loading="lazy" data-fade="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;">
+            </div>
+            <div style="aspect-ratio:1/1;border-radius:18px;overflow:hidden;position:relative;background:linear-gradient(140deg,#D9C7EC,#F4DEE3);display:flex;align-items:flex-end;justify-content:center;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#7d6b94;padding:0 10px 12px;text-align:center;position:relative;z-index:1;">[ about-2.jpg ]</span>
+              <img src="./about-1-mqis0ns0.jpg" alt="" loading="lazy" data-fade="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;">
+            </div>
+            <div style="aspect-ratio:1/1;border-radius:18px 18px 50px 18px;overflow:hidden;position:relative;background:repeating-linear-gradient(45deg,#F6E6EA 0 14px,#F0DCE1 14px 28px);display:flex;align-items:flex-end;justify-content:center;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#b58a96;padding:0 10px 12px;text-align:center;position:relative;z-index:1;">[ about-3.jpg ]</span>
+              <img src="./about-2-mqirzxto.jpg" alt="" loading="lazy" data-fade="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;">
+            </div>
+          </div>
+          <div>
+            <span style="display:inline-block;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8C6E9E;margin-bottom:16px;">Sobre mí</span>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,4.2vw,52px);line-height:1.04;letter-spacing:-.01em;margin:0 0 20px;">Hola, soy Camila — diseño <em style="font-style:italic;color:#C9879A;">soluciones con alma.</em></h2>
+            <p style="font-size:16.5px;line-height:1.72;color:rgba(46,42,51,.78);margin:0 0 20px;max-width:38em;">Graduada en Diseño Integral en la PUC de Chile. Integro diseño industrial, gráfico, digital e inclusivo en proyectos colaborativos, investigando en terreno y empatizando con las personas.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;">
+              <span style="padding:8px 16px;border-radius:999px;background:#EFE7F4;color:#8C6E9E;font-weight:600;font-size:13.5px;">Diseño con propósito</span>
+              <span style="padding: 8px 16px; border-radius: 999px; color: #C9879A; font-weight: 600; font-size: 13.5px; background-color: #f8e7eb">Adaptable</span>
+              <span style="padding:8px 16px;border-radius:999px;background:#EFE7F4;color:#8C6E9E;font-weight:600;font-size:13.5px;">IA aplicada</span>
+            </div>
+          </div>
+        </div>
+        <div style="height:1px;background:rgba(46,42,51,.1);margin:clamp(26px,3.6vw,42px) 0;"></div>
+        <div data-cvrow="" style="display:grid;grid-template-columns:1.05fr .85fr 1.35fr 1.05fr;gap:clamp(22px,2.8vw,44px);">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8C6E9E;margin-bottom:16px;">Formación</div>
+            <div style="margin-bottom:14px;"><strong style="display:block;font-size:15.5px;">Diseño Integral</strong><span style="font-size:13.5px;color:rgba(46,42,51,.6);">PUC de Chile · 2020–2025</span></div>
+            <div><strong style="display:block;font-size:15.5px;">Educación Media</strong><span style="font-size:13.5px;color:rgba(46,42,51,.6);">The Grange School · 2006–2019</span></div>
+          </div>
+          <div style="width: 151px; height: 193px">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8C6E9E;margin-bottom:16px;">Idiomas</div>
+            <div style="margin-bottom:14px;"><strong style="display:block;font-size:15.5px;">Español</strong><span style="font-size:13.5px;color:rgba(46,42,51,.6);">Nativo</span></div>
+            <div><strong style="display:block;font-size:15.5px;">Inglés</strong><span style="font-size:13.5px;color:rgba(46,42,51,.6);">Avanzado</span></div>
+          </div><div style="width: 283px; height: 195px">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8C6E9E;margin-bottom:16px;">Aptitudes</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <span style="padding:6px 12px;border-radius:9px;background:#EFE7F4;color:#8C6E9E;font-size:12.5px;font-weight:500;">Creatividad</span><span style="padding:6px 12px;border-radius:9px;background:#EFE7F4;color:#8C6E9E;font-size:12.5px;font-weight:500;">Trabajo en equipo</span><span style="padding:6px 12px;border-radius:9px;background:#EFE7F4;color:#8C6E9E;font-size:12.5px;font-weight:500;">Responsabilidad</span><span style="padding:6px 12px;border-radius:9px;background:#EFE7F4;color:#8C6E9E;font-size:12.5px;font-weight:500;">Proactividad</span><span style="padding:6px 12px;border-radius:9px;background:#EFE7F4;color:#8C6E9E;font-size:12.5px;font-weight:500;">Adaptabilidad</span><span style="padding:6px 12px;border-radius:9px;background:#EFE7F4;color:#8C6E9E;font-size:12.5px;font-weight:500;">Aprendizaje rápido</span>
+            </div>
+          </div>
+          
+          <div style="width: 250px; height: 198px">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8C6E9E;margin-bottom:16px;">Herramientas</div><div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <span style="padding: 6px 12px; border-radius: 9px; border: 1px solid rgba(46,42,51,.1); font-size: 12.5px; font-weight: 500; color: #c9879a; background-color: #f8e7eb">Figma</span><span style="padding: 6px 12px; border-radius: 9px; border: 1px solid rgba(46,42,51,.1); font-size: 12.5px; font-weight: 500; background-color: #f8e7eb; color: #c9879a">Adobe CC</span><span style="padding: 6px 12px; border-radius: 9px; border: 1px solid rgba(46,42,51,.1); font-size: 12.5px; font-weight: 500; background-color: #f8e7eb; color: #c9879a" data-om-label="IA">IA</span><span style="padding: 6px 12px; border-radius: 9px; border: 1px solid rgba(46,42,51,.1); font-size: 12.5px; font-weight: 500; background-color: #f8e7eb; color: #c9879a">HTML · CSS</span><span style="padding: 6px 12px; border-radius: 9px; border: 1px solid rgba(46,42,51,.1); font-size: 12.5px; font-weight: 500; background-color: #f8e7eb; color: #c9879a">Impresión 3D</span><span style="padding: 6px 12px; border-radius: 9px; border: 1px solid rgba(46,42,51,.1); font-size: 12.5px; font-weight: 500; background-color: #f8e7eb; color: #c9879a">Corte láser</span><span style="padding: 6px 12px; border-radius: 9px; border: 1px solid rgba(46,42,51,.1); font-size: 12.5px; font-weight: 500; background-color: #f8e7eb; color: #c9879a">Edición de videos</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- AREAS -->
+      <div class="reveal" style="margin-top:clamp(56px,7vw,96px);">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:30px;">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(26px,3.4vw,40px);margin:0;">¿En qué puedo ayudarte?</h3>
+          <p style="font-size:15px;color:rgba(46,42,51,.62);max-width:30em;margin:0;">Pensamiento UX + estrategia de marca para soluciones que resuelven necesidades reales.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;" data-areas="">
+          <sc-for list="{{ areas }}" as="a" hint-placeholder-count="4">
+            <div data-areacard="" style="border-radius:24px;padding:30px 26px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;background:{{ a.bg }};transition:transform .4s cubic-bezier(.19,1,.22,1),box-shadow .4s ease;" style-hover="transform:translateY(-6px);box-shadow:0 24px 44px -24px rgba(140,110,158,.45);">
+              <span style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:{{ a.fg }};">{{ a.num }}</span>
+              <div>
+                <strong style="display:block;font-size:18px;margin-bottom:7px;color:{{ a.title }};">{{ a.name }}</strong>
+                <p style="font-size:14px;line-height:1.55;margin:0;color:{{ a.body }};">{{ a.desc }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section><section id="proyectos" style="max-width: 1200px; margin: 0 auto; padding: clamp(60px,8vw,110px) clamp(20px,5vw,40px); scroll-margin-top: 80px; height: 920px">
+      
+      <div class="reveal" style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 0px; margin-bottom: 37px; height: 96px; margin-top: -34px">
+        <div>
+          <span style="display: inline-block; font-family: 'IBM Plex Mono',monospace; font-weight: 500; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #8C6E9E; margin-bottom: 14px">Proyectos</span><h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,5vw,64px);line-height:1;letter-spacing:-.01em;margin:0;">Trabajos seleccionados</h2>
+          
+        </div>
+        <p style="font-size:15px;color:rgba(46,42,51,.6);max-width:24em;margin:0;">Del producto físico a la experiencia digital y la marca.</p>
+      </div><div data-projgrid="" style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,26px);">
+        <sc-for list="{{ projects }}" as="p" hint-placeholder-count="6">
+          <a href="#" onClick="{{ p.open }}" data-pcard="" class="reveal" style="display:block;text-decoration:none;color:inherit;cursor:pointer;">
+            <div data-pcardimg="" style="aspect-ratio:3/2;border-radius:16px;overflow:hidden;position:relative;background:{{ p.bg }};transition:transform .5s cubic-bezier(.19,1,.22,1),box-shadow .5s ease;" style-hover="transform:translateY(-6px);box-shadow:0 26px 50px -26px rgba(140,110,158,.5);">
+              <span style="position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:rgba(46,42,51,.4);z-index:1;">[ {{ p.id }}-cover ]</span>
+              <img src="{{ p.coverSrc }}" alt="{{ p.name }}" loading="lazy" data-fade="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:transform .7s cubic-bezier(.19,1,.22,1);" data-pcardphoto="">
+              <span style="position:absolute;top:13px;left:13px;z-index:3;padding:5px 11px;border-radius:999px;background:rgba(247,243,241,.85);backdrop-filter:blur(6px);font-size:11px;font-weight:600;color:#8C6E9E;white-space:nowrap;">{{ p.tag0 }}</span>
+            </div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:13px;">
+              <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;margin:0;white-space:nowrap;">{{ p.name }}</h3>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(46,42,51,.45);white-space:nowrap;">{{ p.year }}</span>
+            </div>
+            <p style="font-size:13px;color:rgba(46,42,51,.62);margin:4px 0 0;">{{ p.category }}</p>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer id="contacto" style="border-top:1px solid rgba(46,42,51,.08);margin-top:20px;background:linear-gradient(180deg,#F7F3F1,#F1EAF3);scroll-margin-top:80px;">
+    
+  <div style="max-width: 1200px; margin: 0 auto; padding: clamp(60px,8vw,110px) clamp(20px,5vw,40px) clamp(40px,5vw,56px); padding-top: 34px; padding-bottom: 34px">
+      
+      <div class="reveal" data-connect="" style="display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(36px,5vw,64px);align-items:center;margin-bottom:clamp(48px,6vw,80px);">
+        <div>
+          <span style="display:inline-block;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8C6E9E;margin-bottom:16px;">Contacto</span>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,6vw,76px);line-height:.98;letter-spacing:-.01em;margin:0 0 18px;">Conectemos.</h2>
+          <p style="font-size:17px;color:rgba(46,42,51,.7);max-width:30em;margin:0 0 28px;">Abierta a nuevos proyectos, colaboraciones y conversaciones sobre diseño con propósito.</p>
+          <a href="mailto:camila.vallejo@uc.cl;@rel: noopener" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:999px;background:linear-gradient(135deg,#9A6F8E,#8C6E9E);color:#fff;text-decoration:none;font-weight:600;font-size:16px;box-shadow:0 14px 30px -12px rgba(140,110,158,.6);" style-hover="transform:translateY(5px);">Escríbeme →</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <a href="https://www.linkedin.com/in/camila-vallejo-calizaya-9a450a25b/" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;border-radius:18px;text-decoration:none;color:#2E2A33;background:#EFE7F4;transition:transform .3s ease;" style-hover="transform:translateX(5px);">
+            <span style="display:flex;align-items:center;gap:14px;font-weight:600;font-size:16px;"><span style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:11px;background:#8C6E9E;color:#fff;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:14px;">in</span>LinkedIn</span><span style="font-size:18px;color:rgba(46,42,51,.5);">↗</span>
+          </a>
+          <a href="mailto:camila.vallejo@uc.cl" style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;border-radius:18px;text-decoration:none;color:#2E2A33;background:#F6E6EA;transition:transform .3s ease;" style-hover="transform:translateX(5px);">
+            <span style="display:flex;align-items:center;gap:14px;font-weight:600;font-size:15px;"><span style="display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:11px;background:#C9879A;color:#fff;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:16px;">@</span>camila.vallejo@uc.cl</span><span style="font-size:18px;color:rgba(46,42,51,.5);">↗</span>
+          </a>
+        </div>
+      </div><div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding-top:30px;border-top:1px solid rgba(46,42,51,.1);">
+        <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:#8C6E9E;">Camila Vallejo Calizaya</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:rgba(46,42,51,.45);letter-spacing:.03em;">Portfolio · 2026</span>
+      </div>
+    </div></footer>
+
+  <!-- ===================== LIGHTBOX ===================== -->
+  <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ lbBackdrop }}" style="position:fixed;inset:0;z-index:100;background:rgba(40,34,46,.92);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:clamp(20px,5vw,64px);">
+      <button onClick="{{ lbClose }}" aria-label="Cerrar" style="position:absolute;top:22px;right:24px;width:46px;height:46px;border:none;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;border-radius:50%;font-size:20px;">✕</button>
+      <button onClick="{{ lbPrev }}" aria-label="Anterior" style="position:absolute;left:max(16px,3vw);top:50%;transform:translateY(-50%);width:50px;height:50px;border:none;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;border-radius:50%;font-size:22px;">←</button>
+      <button onClick="{{ lbNext }}" aria-label="Siguiente" style="position:absolute;right:max(16px,3vw);top:50%;transform:translateY(-50%);width:50px;height:50px;border:none;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;border-radius:50%;font-size:22px;">→</button>
+      <div style="max-width:min(960px,92vw);width:100%;aspect-ratio:16/10;border-radius:18px;overflow:hidden;position:relative;background:#1c1a22;display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:rgba(255,255,255,.5);position:relative;z-index:1;">[ {{ lbLabel }} ]</span>
+        {{ lbImgEl }}
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    var ACCENTS = [
+      {bg:'#EFE7F4'}, {bg:'#F6E6EA'}, {bg:'#E9E2F2'}
+    ];
+    var P = [
+      {id:'tactun',name:'Tactun',category:'Producto · Diseño inclusivo',year:'2025',role:'Diseñadora de producto · Proyecto de título',duration:'10 meses',tags:['Diseño inclusivo','Producto','Investigación'],n:4,
+        brief:'Dispositivos que conectan a bebés prematuros con sus padres mediante vibraciones en tiempo real de los latidos del corazón.',
+        problema:'La separación en la UCIN dificulta el apego temprano y aumenta el estrés familiar.',
+        proceso:'Investigación clínica, validación con neonatólogas y prototipos funcionales con Arduino e impresión 3D.',
+        solucion:'Un sistema que transmite la frecuencia cardíaca del cuidador al bebé, fortaleciendo el vínculo a distancia. Prototipo funcional validado.'},
+      {id:'sense',name:'sense',category:'UX · Producto digital',year:'2024',role:'Diseñadora UX/UI',duration:'3 meses',tags:['UX','UI','Figma'],n:3,
+        brief:'Dashboard que visualiza grandes volúmenes de datos musicales para leer qué emoción transmite una canción.',
+        problema:'Datos en un Excel masivo, imposibles de interpretar o de relacionar con la emoción de la música.',
+        proceso:'Organicé los datos, definí las variables clave y diseñé un dashboard claro, editable y comprensible.',
+        solucion:'Visualizaciones que revelan patrones entre las características sonoras y las emociones de cada canción.'},
+      {id:'repele-t',name:'Repele-T',category:'Producto · Diseño industrial',year:'2025',role:'Diseñadora de producto',duration:'4 meses',tags:['Diseño industrial','Producto','Prototipado'],n:4,
+        brief:'Rediseño de un traje y boquilla de protección para trabajadores agrícolas que aplican pesticidas.',
+        problema:'Los trabajadores agrícolas están expuestos a químicos por falta de protección adecuada.',
+        proceso:'Investigación del riesgo y rediseño basado en cargas eléctricas: boquilla y traje con la misma polaridad.',
+        solucion:'Un efecto de repulsión aleja el pesticida del cuerpo, reduciendo la exposición y protegiendo su salud.'},
+      {id:'otari',name:'Otari',category:'Producto · Diseño industrial',year:'2022',role:'Diseñadora',duration:'1.5 meses',tags:['Diseño industrial','Modelado 3D','Producto'],n:4,
+        brief:'Un parlante funcional nacido de una ilustración 2D, llevado a un objeto físico real.',
+        problema:'Traducir el diseño 2D de una artista en un producto fabricable sin perder su identidad.',
+        proceso:'Interpretación del diseño, modelado 3D, definición de materiales y estructura interna para el audio.',
+        solucion:'Parlante en madera y plástico que conserva la estética original y funciona de verdad.'},
+      {id:'remax',name:'RE/MAX',category:'Marca & Contenido digital',year:'2022–25',role:'Diseñadora Gráfica & Community Manager · Freelance',duration:'2022 – 2025',tags:['Contenido','Social media','Marca'],n:3,
+        brief:'Identidad y contenido digital para fortalecer la marca de RE/MAX Premier en redes.',
+        problema:'La marca necesitaba coherencia visual y presencia digital en un mercado competitivo.',
+        proceso:'Estrategia comunicacional, contenido para redes, campañas y colaterales de marca.',
+        solucion:'Una identidad digital consistente y reconocible, con un crecimiento de engagement de ~35%.'},
+      {id:'buk',name:'BUK',category:'Marca & Comunicación visual',year:'2026',role:'Diseñadora — Marketing Corporativo · Práctica',duration:'Ene – Mar 2026',tags:['Branding','Comunicación','Social media'],n:0,
+        brief:'Piezas gráficas y contenido visual para la comunicación de BUK en Chile y Colombia.',
+        problema:'Mantener una identidad coherente y de alta calidad en múltiples formatos y mercados.',
+        proceso:'Gráficas para redes, impresos (POP, tarjetas) y recursos para blog y presentaciones.',
+        solucion:'Identidad consistente en cada punto de contacto, con ~20 piezas mensuales.'}
+    ];
+    P.forEach(function(p,i){
+      p.bg = ACCENTS[i % ACCENTS.length].bg;
+      p.coverSrc = 'images/projects/'+p.id+'-cover.jpg';
+      p.gallery = [];
+      for(var k=1;k<=p.n;k++){ p.gallery.push({src:'images/projects/'+p.id+'-'+k+'.jpg',label:p.name+' '+k}); }
+    });
+    this.P = P;
+    this.state = { view:'home', id:null, lbOpen:false, lbImages:[], lbI:0 };
+  }
+
+  componentDidMount(){
+    var self=this;
+    this._check = function(){ self.checkReveal(); };
+    window.addEventListener('scroll', this._check, {passive:true});
+    window.addEventListener('resize', this._check, {passive:true});
+    [0,80,250,600].forEach(function(t){ setTimeout(self._check, t); });
+    requestAnimationFrame(this._check);
+    // hard fallback: never leave content hidden
+    this._fb = setTimeout(function(){ self.revealAll(); }, 1400);
+    this._key = function(e){
+      if(!self.state.lbOpen) return;
+      if(e.key==='Escape') self.closeLb();
+      else if(e.key==='ArrowRight') self.stepLb(1);
+      else if(e.key==='ArrowLeft') self.stepLb(-1);
+    };
+    document.addEventListener('keydown', this._key);
+    // hide any image that fails to load so the styled placeholder shows through
+    this._imgErr = function(e){ var t=e.target; if(t && t.tagName==='IMG'){ t.style.display='none'; } };
+    document.addEventListener('error', this._imgErr, true);
+    this.setupBlob();
+  }
+  componentDidUpdate(prev){
+    if(prev.view!==this.state.view){ window.scrollTo(0,0); }
+    var self=this;
+    requestAnimationFrame(this._check);
+    [60,300].forEach(function(t){ setTimeout(self._check, t); });
+    this.setupBlob();
+  }
+
+  setupBlob(){
+    var hv=document.querySelector('[data-herovisual]');
+    if(!hv || hv._blobBound) return;
+    var wrap=hv.querySelector('[data-blobwrap]');
+    var blob=hv.querySelector('[data-blob]');
+    if(!wrap) return;
+    hv._blobBound=true;
+    hv.addEventListener('mousemove', function(e){
+      var r=hv.getBoundingClientRect();
+      var dx=(e.clientX-(r.left+r.width/2))/(r.width/2);
+      var dy=(e.clientY-(r.top+r.height/2))/(r.height/2);
+      wrap.style.transform='translate('+(dx*40).toFixed(1)+'px,'+(dy*40).toFixed(1)+'px) scale(1.14)';
+      if(blob) blob.style.filter='blur(7px) saturate(1.3) brightness(1.03)';
+    });
+    hv.addEventListener('mouseleave', function(){
+      wrap.style.transform='';
+      if(blob) blob.style.filter='';
+    });
+  }
+  componentWillUnmount(){
+    document.removeEventListener('keydown', this._key);
+    window.removeEventListener('scroll', this._check);
+    window.removeEventListener('resize', this._check);
+    document.removeEventListener('error', this._imgErr, true);
+    clearTimeout(this._fb);
+  }
+
+  checkReveal(){
+    var vh=window.innerHeight||800;
+    document.querySelectorAll('.reveal:not([data-in])').forEach(function(el){
+      if(el.getBoundingClientRect().top < vh*0.92){ el.setAttribute('data-in','1'); }
+    });
+  }
+  revealAll(){
+    document.querySelectorAll('.reveal:not([data-in])').forEach(function(el){ el.setAttribute('data-in','1'); });
+  }
+
+  scrollTo(id){
+    var t=document.getElementById(id); if(!t) return;
+    var y=t.getBoundingClientRect().top+window.pageYOffset-66;
+    window.scrollTo({top:y,behavior:'smooth'});
+  }
+
+  openDetail(id){ this.setState({view:'detail',id:id}); }
+  goHome(){ this.setState({view:'home',id:null}); }
+
+  openLb(images,i){ this.setState({lbOpen:true,lbImages:images,lbI:i}); document.body.style.overflow='hidden'; }
+  closeLb(){ this.setState({lbOpen:false}); document.body.style.overflow=''; }
+  stepLb(d){ var n=this.state.lbImages.length; this.setState(function(s){ return {lbI:(s.lbI+d+n)%n}; }); }
+
+  renderVals(){
+    var self=this;
+
+    var areas=[
+      {num:'01',name:'Identidad & marca',desc:'Branding, sistemas gráficos y dirección de arte coherentes.',bg:'#EFE7F4',fg:'#8C6E9E',title:'#3a2f45',body:'rgba(58,47,69,.7)'},
+      {num:'02',name:'Producto & prototipado',desc:'Diseño industrial y digital, del concepto al prototipo.',bg:'#F6E6EA',fg:'#C9879A',title:'#5a3744',body:'rgba(90,55,68,.72)'},
+      {num:'03',name:'UX',desc:'Investigación, flujos y experiencias centradas en personas.',bg:'#E9E2F2',fg:'#7C6BA8',title:'#3a3360',body:'rgba(58,51,96,.7)'},
+      {num:'04',name:'Contenido digital',desc:'Piezas para redes, campañas y comunicación de marca.',bg:'#F6E6EA',fg:'#C9879A',title:'#5a3744',body:'rgba(90,55,68,.72)'}
+    ];
+
+    var projects=this.P.map(function(p,i){
+      var washes=['rgba(140,110,158,1)','rgba(201,135,154,1)','rgba(124,107,168,1)'];
+      return {
+        id:p.id,name:p.name,category:p.category,year:p.year,bg:p.bg,coverSrc:p.coverSrc,tag0:p.tags[0],overlay:washes[i%washes.length],
+        open:function(e){ e.preventDefault(); self.openDetail(p.id); }
+      };
+    });
+
+    var marquee=[];
+    this.P.concat(this.P).forEach(function(p,i){ marquee.push(p.name); });
+
+    var vals={
+      isHome: this.state.view==='home',
+      isDetail: this.state.view==='detail',
+      onNavScroll: function(e){
+        var t=e.currentTarget.getAttribute('data-target');
+        e.preventDefault();
+        if(self.state.view!=='home'){ self.goHome(); setTimeout(function(){ self.scrollTo(t); },70); }
+        else { self.scrollTo(t); }
+      },
+      areas:areas,
+      projects:projects,
+      marqueeItems:marquee
+    };
+
+    // detail
+    if(this.state.view==='detail'){
+      var p=this.P.find(function(x){return x.id===self.state.id;});
+      var idx=this.P.indexOf(p);
+      var next=this.P[(idx+1)%this.P.length];
+      vals.d=p;
+      vals.dCover=p.coverSrc;
+      vals.dTags=p.tags;
+      vals.dGallery=p.gallery.map(function(g,i){
+        return {src:g.src,label:g.label,open:function(){ self.openLb(p.gallery,i); }};
+      });
+      vals.hasGallery=p.gallery.length>0;
+      vals.nextName=next.name;
+      vals.openNext=function(){ self.openDetail(next.id); };
+      vals.backHome=function(){ self.goHome(); };
+    }
+
+    // lightbox
+    vals.lbOpen=this.state.lbOpen;
+    vals.lbLabel='';
+    vals.lbImgEl=null;
+    if(this.state.lbOpen){
+      var g=this.state.lbImages[this.state.lbI];
+      vals.lbLabel=g.label;
+      vals.lbImgEl=React.createElement('img',{src:g.src,alt:g.label,style:{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'contain',background:'#1c1a22',zIndex:2}});
+    }
+    vals.lbClose=function(){ self.closeLb(); };
+    vals.lbPrev=function(e){ e.stopPropagation(); self.stepLb(-1); };
+    vals.lbNext=function(e){ e.stopPropagation(); self.stepLb(1); };
+    vals.lbBackdrop=function(e){ if(e.target===e.currentTarget) self.closeLb(); };
+
+    return vals;
+  }
+}
+</script>
+</body>
+</html>
